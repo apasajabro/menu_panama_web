@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Panama Corner — Menu Digital</title>
+    <meta
+      name="description"
+      content="Menu digital Panama Corner. Pilihan makanan, snack, dan minuman favorit yang nyaman dibuka dari mobile."
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="navbar" aria-label="Navigasi utama">
+        <a href="#" class="brand" aria-label="Panama Corner Home">
+          <span class="brand-mark">PC</span>
+          <span>
+            <strong>Panama Corner</strong>
+            <small>Food & Drink Menu</small>
+          </span>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#menu">Menu</a>
+          <a href="#special">Favorit</a>
+          <a href="#reservation">Pesan</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero hero-panama">
+        <div class="hero-content">
+          <p class="eyebrow">Panama Corner</p>
+          <h1>Menu favorit untuk makan santai dan ngopi nyaman.</h1>
+          <p class="hero-text">
+            Pilih makanan, snack, dan minuman favorit Panama Corner langsung
+            dari layar HP. Harga jelas, tampilan rapi, dan pesanan bisa dikirim
+            lewat WhatsApp.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#menu" class="btn btn-primary">Lihat Menu</a>
+            <a href="#special" class="btn btn-secondary">Menu Favorit</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>25+</strong>
+              <span>Menu Pilihan</span>
+            </div>
+            <div>
+              <strong>2k</strong>
+              <span>Mulai Dari</span>
+            </div>
+            <div>
+              <strong>QR</strong>
+              <span>Menu Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-showcase" aria-label="Menu favorit Panama Corner">
+          <article class="hero-feature-card hero-feature-main">
+            <img
+              src="assets/menu/split-image-10.jpg"
+              alt="Ayam Bakar Panama Corner"
+              onerror="this.src = 'assets/menu/split-image-9.jpg'"
+            />
+            <div class="hero-feature-info">
+              <span>Best Seller</span>
+              <strong>Ayam Bakar</strong>
+              <p>Rp 18.000</p>
+            </div>
+          </article>
+
+          <article class="hero-feature-card">
+            <img
+              src="assets/menu/split-image-4.jpg"
+              alt="Mix Platter Panama Corner"
+              onerror="this.src = 'assets/menu/split-image-1.jpg'"
+            />
+            <div class="hero-feature-info">
+              <span>Snack</span>
+              <strong>Mix Platter</strong>
+              <p>Rp 20.000</p>
+            </div>
+          </article>
+
+          <article class="hero-feature-card">
+            <img
+              src="assets/menu/split-image-9.jpg"
+              alt="Nasi Goreng Panama Corner"
+              onerror="this.src = 'assets/menu/split-image-8.jpg'"
+            />
+            <div class="hero-feature-info">
+              <span>Favorite</span>
+              <strong>Nasi Goreng</strong>
+              <p>Rp 12.000</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section intro-section">
+        <div>
+          <p class="eyebrow">Today's Highlight</p>
+          <h2>Menu sederhana, harga jelas, dan mudah dipesan.</h2>
+        </div>
+        <p>
+          Website ini dibuat statis agar ringan, mudah di-host, dan cocok untuk
+          QR menu Panama Corner tanpa perlu database atau backend.
+        </p>
+      </section>
+
+      <section class="special-grid" id="special">
+        <article class="special-card large">
+          <span class="badge">Best Seller</span>
+          <h3>Ayam Bakar</h3>
+          <p>Ayam bakar dengan tahu, tempe, dan sambal.</p>
+          <strong>Rp 18.000</strong>
+        </article>
+
+        <article class="special-card">
+          <span class="badge">Snack</span>
+          <h3>Mix Platter</h3>
+          <p>Pilihan snack untuk teman santai.</p>
+          <strong>Rp 20.000</strong>
+        </article>
+
+        <article class="special-card dark">
+          <span class="badge">Favorite</span>
+          <h3>Nasi Goreng</h3>
+          <p>Nasi goreng dengan telor.</p>
+          <strong>Rp 12.000</strong>
+        </article>
+      </section>
+
+      <section class="section menu-section" id="menu">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Explore Menu</p>
+            <h2>Silakan pilih menu favorit Anda.</h2>
+          </div>
+
+          <div class="search-box">
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Cari menu..."
+              aria-label="Cari menu makanan atau minuman"
+            />
+          </div>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs" aria-label="Kategori menu">
+          <button class="tab active" data-category="all">Semua</button>
+          <button class="tab" data-category="main">Makanan</button>
+          <button class="tab" data-category="snack">Snack</button>
+          <button class="tab" data-category="drink">Minuman</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+
+        <p class="empty-state" id="emptyState" hidden>
+          Menu tidak ditemukan. Coba kata kunci lain.
+        </p>
+      </section>
+
+      <section class="reservation" id="reservation">
+        <div>
+          <p class="eyebrow">Order</p>
+          <h2>Ingin pesan atau tanya menu?</h2>
+          <p>
+            Kirim pesanan melalui WhatsApp setelah memilih menu dari daftar.
+          </p>
+        </div>
+
+        <a
+          class="btn btn-primary"
+          href="https://wa.me/6281234567890?text=Halo%20Panama%20Corner,%20saya%20ingin%20pesan."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hubungi WhatsApp
+        </a>
+      </section>
+    </main>
+
+    <button class="cart-button" id="cartButton" aria-label="Lihat pesanan">
+      <span>Pesanan</span>
+      <strong id="cartCount">0</strong>
+    </button>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+      <div class="cart-header">
+        <div>
+          <p class="eyebrow">Order Preview</p>
+          <h2>Pesanan Anda</h2>
+        </div>
+        <button class="icon-button" id="closeCart" aria-label="Tutup pesanan">
+          ×
+        </button>
+      </div>
+
+      <div class="cart-items" id="cartItems"></div>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong id="cartTotal">Rp 0</strong>
+        </div>
+
+        <a
+          id="checkoutButton"
+          class="btn btn-primary btn-full"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pesan via WhatsApp
+        </a>
+      </div>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <footer class="site-footer">
+      <p>© 2026 Panama Corner. Digital menu concept.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
