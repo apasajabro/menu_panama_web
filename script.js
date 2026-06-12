@@ -287,7 +287,7 @@ const addToCart = (id) => {
   }
 
   renderCart();
-  openCart();
+  animateCartButton();
 };
 
 const decreaseCartItem = (id) => {
@@ -309,6 +309,16 @@ const increaseCartItem = (id) => {
 
   existingItem.qty += 1;
   renderCart();
+};
+
+const animateCartButton = () => {
+  if (!cartButton) return;
+
+  cartButton.classList.remove("cart-button-bump");
+
+  window.requestAnimationFrame(() => {
+    cartButton.classList.add("cart-button-bump");
+  });
 };
 
 const buildWhatsappMessage = () => {
