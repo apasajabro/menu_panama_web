@@ -5,11 +5,9 @@ const appConfig = {
   whatsappNumber: "6289678199199",
   whatsappGreeting: "Halo Panama Corner, saya ingin pesan:",
   directWhatsappMessage: "Halo Panama Corner, saya ingin pesan.",
-
-  heroTitle: "Menu favorit untuk makan santai dan ngopi nyaman.",
+  heroTitle: "Makan, ngemil, ngopi — semua ada di sini.",
   heroDescription:
-    "Pilih makanan, snack, dan minuman favorit Panama Corner langsung dari layar HP. Harga jelas, tampilan rapi, dan pesanan bisa dikirim lewat WhatsApp.",
-
+    "Pilih makanan, snack, atau minuman favoritmu langsung dari HP.",
   currency: "IDR",
   locale: "id-ID",
 
