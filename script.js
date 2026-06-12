@@ -19,12 +19,32 @@ const orderNoteInput = document.getElementById("orderNoteInput");
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
 
+const brandName = document.getElementById("brandName");
+const brandSubtitle = document.getElementById("brandSubtitle");
+const heroEyebrow = document.getElementById("heroEyebrow");
+const heroTitle = document.getElementById("heroTitle");
+const heroDescription = document.getElementById("heroDescription");
+const menuCountLabel = document.getElementById("menuCountLabel");
+const startPriceLabel = document.getElementById("startPriceLabel");
+const directWhatsappButton = document.getElementById("directWhatsappButton");
+const footerText = document.getElementById("footerText");
+
 const defaultConfig = {
   restaurantName: "Panama Corner",
+  brandSubtitle: "Food & Drink Menu",
+
   whatsappNumber: "6281234567890",
   whatsappGreeting: "Halo Panama Corner, saya ingin pesan:",
+  directWhatsappMessage: "Halo Panama Corner, saya ingin pesan.",
+
+  heroTitle: "Menu favorit untuk makan santai dan ngopi nyaman.",
+  heroDescription:
+    "Pilih makanan, snack, dan minuman favorit Panama Corner langsung dari layar HP. Harga jelas, tampilan rapi, dan pesanan bisa dikirim lewat WhatsApp.",
+
   currency: "IDR",
   locale: "id-ID",
+
+  footerYear: "2026",
 };
 
 const config =
@@ -50,8 +70,18 @@ const formatCurrency = (value) => {
   }).format(value);
 };
 
+const formatShortPrice = (value) => {
+  if (!Number.isFinite(value)) return "-";
+
+  if (value >= 1000) {
+    return `${Math.floor(value / 1000)}k`;
+  }
+
+  return String(value);
+};
+
 const getInitial = (name) => {
-  return name
+  return String(name)
     .split(" ")
     .filter(Boolean)
     .map((word) => word[0])
@@ -61,7 +91,7 @@ const getInitial = (name) => {
 };
 
 const escapeHtml = (value) => {
-  return String(value)
+  return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -77,7 +107,23 @@ const getCartTotalQty = () => {
   return cart.reduce((sum, item) => sum + item.qty, 0);
 };
 
+const getMinimumMenuPrice = () => {
+  if (menus.length === 0) return 0;
+
+  return menus.reduce((lowest, item) => {
+    if (!Number.isFinite(item.price)) return lowest;
+    return Math.min(lowest, item.price);
+  }, menus[0].price);
+};
+
+const setText = (element, value) => {
+  if (!element) return;
+  element.textContent = value;
+};
+
 const setCheckoutDisabled = (isDisabled) => {
+  if (!checkoutButton) return;
+
   if (isDisabled) {
     checkoutButton.href = "#";
     checkoutButton.setAttribute("aria-disabled", "true");
@@ -89,8 +135,51 @@ const setCheckoutDisabled = (isDisabled) => {
   checkoutButton.classList.remove("is-disabled");
 };
 
+const buildDirectWhatsappUrl = () => {
+  const message = encodeURIComponent(
+    config.directWhatsappMessage ||
+      `Halo ${config.restaurantName}, saya ingin pesan.`,
+  );
+
+  return `https://wa.me/${config.whatsappNumber}?text=${message}`;
+};
+
+const applyConfigToPage = () => {
+  document.title = `${config.restaurantName} — Menu Digital`;
+
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.setAttribute(
+      "content",
+      `Menu digital ${config.restaurantName}. Pilihan makanan, snack, dan minuman favorit yang nyaman dibuka dari mobile.`,
+    );
+  }
+
+  setText(brandName, config.restaurantName);
+  setText(brandSubtitle, config.brandSubtitle);
+  setText(heroEyebrow, config.restaurantName);
+  setText(heroTitle, config.heroTitle);
+  setText(heroDescription, config.heroDescription);
+
+  setText(menuCountLabel, `${menus.length}+`);
+  setText(startPriceLabel, formatShortPrice(getMinimumMenuPrice()));
+
+  if (directWhatsappButton) {
+    directWhatsappButton.href = buildDirectWhatsappUrl();
+    directWhatsappButton.setAttribute(
+      "aria-label",
+      `Hubungi ${config.restaurantName} melalui WhatsApp`,
+    );
+  }
+
+  setText(
+    footerText,
+    `© ${config.footerYear} ${config.restaurantName}. Digital menu concept.`,
+  );
+};
+
 const renderMenu = () => {
-  const keyword = searchInput.value.trim().toLowerCase();
+  const keyword = searchInput?.value.trim().toLowerCase() || "";
 
   const filteredItems = menus.filter((item) => {
     const matchesCategory =
@@ -155,7 +244,9 @@ const renderMenu = () => {
     })
     .join("");
 
-  emptyState.hidden = filteredItems.length > 0;
+  if (emptyState) {
+    emptyState.hidden = filteredItems.length > 0;
+  }
 };
 
 const addToCart = (id) => {
@@ -240,8 +331,13 @@ const renderCart = () => {
   const totalQty = getCartTotalQty();
   const totalPrice = getCartTotalPrice();
 
-  cartCount.textContent = totalQty;
-  cartTotal.textContent = formatCurrency(totalPrice);
+  if (cartCount) {
+    cartCount.textContent = totalQty;
+  }
+
+  if (cartTotal) {
+    cartTotal.textContent = formatCurrency(totalPrice);
+  }
 
   if (cart.length === 0) {
     cartItems.innerHTML = `
@@ -264,9 +360,9 @@ const renderCart = () => {
           </div>
 
           <div class="qty-control">
-            <button type="button" data-action="decrease" data-id="${item.id}">−</button>
+            <button type="button" data-action="decrease" data-id="${item.id}" aria-label="Kurangi ${escapeHtml(item.name)}">−</button>
             <strong>${item.qty}</strong>
-            <button type="button" data-action="increase" data-id="${item.id}">+</button>
+            <button type="button" data-action="increase" data-id="${item.id}" aria-label="Tambah ${escapeHtml(item.name)}">+</button>
           </div>
         </div>
       `,
@@ -305,7 +401,7 @@ categoryTabs.addEventListener("click", (event) => {
   renderMenu();
 });
 
-searchInput.addEventListener("input", renderMenu);
+searchInput?.addEventListener("input", renderMenu);
 
 customerNameInput?.addEventListener("input", updateCheckoutLink);
 tableNumberInput?.addEventListener("input", updateCheckoutLink);
@@ -376,5 +472,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+applyConfigToPage();
 renderMenu();
 renderCart();

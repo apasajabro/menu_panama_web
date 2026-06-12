@@ -2,7 +2,7 @@ const appConfig = {
   restaurantName: "Panama Corner",
   brandSubtitle: "Food & Drink Menu",
 
-  whatsappNumber: "6281234567890",
+  whatsappNumber: "6289678199199",
   whatsappGreeting: "Halo Panama Corner, saya ingin pesan:",
   directWhatsappMessage: "Halo Panama Corner, saya ingin pesan.",
 
@@ -12,4 +12,6 @@ const appConfig = {
 
   currency: "IDR",
   locale: "id-ID",
+
+  footerYear: "2026",
 };
