@@ -19,8 +19,8 @@
         <a href="#" class="brand" aria-label="Panama Corner Home">
           <span class="brand-mark">PC</span>
           <span>
-            <strong>Panama Corner</strong>
-            <small>Food & Drink Menu</small>
+            <strong id="brandName">Panama Corner</strong>
+            <small id="brandSubtitle">Food & Drink Menu</small>
           </span>
         </a>
 
@@ -45,9 +45,11 @@
     <main>
       <section class="hero hero-panama">
         <div class="hero-content">
-          <p class="eyebrow">Panama Corner</p>
-          <h1>Menu favorit untuk makan santai dan ngopi nyaman.</h1>
-          <p class="hero-text">
+          <p class="eyebrow" id="heroEyebrow">Panama Corner</p>
+          <h1 id="heroTitle">
+            Menu favorit untuk makan santai dan ngopi nyaman.
+          </h1>
+          <p class="hero-text" id="heroDescription">
             Pilih makanan, snack, dan minuman favorit Panama Corner langsung
             dari layar HP. Harga jelas, tampilan rapi, dan pesanan bisa dikirim
             lewat WhatsApp.
@@ -60,11 +62,11 @@
 
           <div class="hero-stats">
             <div>
-              <strong>25+</strong>
+              <strong id="menuCountLabel">25+</strong>
               <span>Menu Pilihan</span>
             </div>
             <div>
-              <strong>2k</strong>
+              <strong id="startPriceLabel">2k</strong>
               <span>Mulai Dari</span>
             </div>
             <div>
@@ -198,7 +200,8 @@
 
         <a
           class="btn btn-primary"
-          href="https://wa.me/6281234567890?text=Halo%20Panama%20Corner,%20saya%20ingin%20pesan."
+          id="directWhatsappButton"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -298,9 +301,11 @@
     <div class="overlay" id="overlay"></div>
 
     <footer class="site-footer">
-      <p>© 2026 Panama Corner. Digital menu concept.</p>
+      <p id="footerText">© 2026 Panama Corner. Digital menu concept.</p>
     </footer>
 
+    <script src="config.js"></script>
+    <script src="menu-data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
